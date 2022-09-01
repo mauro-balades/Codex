@@ -1,10 +1,19 @@
 import React from 'react';
 
+import { ThemeProvider } from "styled-components";
+import Core from './components/core';
+import { AppWrapper } from './components/layout';
+import { defaultTheme } from './themes';
+
+import "normalize.css";
+
 function App() {
   return (
-    <div className="App">
-      hello
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <AppWrapper>
+        <Core />
+      </AppWrapper>
+    </ThemeProvider>
   );
 }
 

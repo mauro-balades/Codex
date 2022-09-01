@@ -5,6 +5,7 @@ export const defaultTheme = {
         secondary: "#1E1E1E"
     },
     color: {
+        accent: "#2295FF",
         primary: "#fff"
     },
     font: {

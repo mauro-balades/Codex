@@ -22,6 +22,8 @@ export const TabsContainer = styled.div`
     align-items: center;
     padding: 10px 0;
 
+    border-left: 2px solid ${(props: any) => props.theme.background.primary};
+
     & li {
         list-style: none;
     }
@@ -37,6 +39,7 @@ export const TabsContainer = styled.div`
 
         display: flex;
         align-items: center;
+
     }
       
     & .react-tabs__tab {

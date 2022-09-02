@@ -16,4 +16,6 @@ export const AppWrapper = styled.div`
 
     position: relative;
     display: flex;
+
+    overflow: hidden;
 `

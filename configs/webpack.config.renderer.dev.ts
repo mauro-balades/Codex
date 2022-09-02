@@ -6,10 +6,12 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import chalk from 'chalk';
 import { merge } from 'webpack-merge';
 import { execSync, spawn } from 'child_process';
+import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import baseConfig from './webpack.config.base';
 import webpackPaths from './webpack.paths';
 import checkNodeEnv from '../scripts/check-node-env';
+import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 
 // When an ESLint server is running, we can't set the NODE_ENV so we'll check if it's
 // at the dev webpack config is not accidentally run in a production environment
@@ -42,6 +44,12 @@ if (
 
 const configuration: webpack.Configuration = {
   devtool: 'inline-source-map',
+  resolve: {
+    alias: {
+        path: require.resolve("path-browserify")
+      }
+  },
+
 
   mode: 'development',
 
@@ -113,6 +121,10 @@ const configuration: webpack.Configuration = {
         ]),
 
     new webpack.NoEmitOnErrorsPlugin(),
+    new NodePolyfillPlugin(),
+    new MonacoWebpackPlugin({
+      publicPath: "/dist/"
+    }),
 
     /**
      * Create global constants which can be configured at compile time.

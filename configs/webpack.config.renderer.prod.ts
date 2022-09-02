@@ -7,6 +7,7 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { merge } from 'webpack-merge';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -14,6 +15,7 @@ import baseConfig from './webpack.config.base';
 import webpackPaths from './webpack.paths';
 import checkNodeEnv from '../scripts/check-node-env';
 import deleteSourceMaps from '../scripts/delete-source-maps';
+import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 
 checkNodeEnv('production');
 deleteSourceMaps();
@@ -22,6 +24,11 @@ const configuration: webpack.Configuration = {
   devtool: 'source-map',
 
   mode: 'production',
+  resolve: {
+    alias: {
+        path: require.resolve("path-browserify")
+      }
+  },
 
   target: ['web', 'electron-renderer'],
 
@@ -108,6 +115,10 @@ const configuration: webpack.Configuration = {
     new BundleAnalyzerPlugin({
       analyzerMode: process.env.ANALYZE === 'true' ? 'server' : 'disabled',
     }),
+    new MonacoWebpackPlugin({
+      publicPath: "/dist/"
+    }),
+    new NodePolyfillPlugin(),
 
     new HtmlWebpackPlugin({
       filename: 'index.html',

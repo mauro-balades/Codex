@@ -16,7 +16,6 @@ const dist = webpackPaths.dllPath;
 
 const configuration: webpack.Configuration = {
   context: webpackPaths.rootPath,
-
   devtool: 'eval',
 
   mode: 'development',

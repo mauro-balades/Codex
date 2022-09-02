@@ -2,8 +2,9 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.section`
+    max-width: 400px;
     width: 400px;
-    height: 100%;
+    height: calc(100% - 6.5rem);
 
     position: relative;
 
@@ -13,7 +14,10 @@ export const Wrapper = styled.section`
 
 export const Panels = styled.div`
     height: 100%;
+    width: 100%;
     background: ${(props: any) => props.theme.background.secondary};
+
+    overflow-y: auto;
 `
 
 export const TabsContainer = styled.div`
@@ -83,4 +87,17 @@ export const TabsContainer = styled.div`
     & .react-tabs__tab-panel--selected {
         display: block;
     }
+`
+
+export const TopNav = styled.div`
+    height: 35px;
+    padding: 5px 10px;
+
+    background: ${(props: any) => props.theme.background.secondary};
+
+    color: ${(props: any) => props.theme.color.primary};
+    border-bottom: 1px solid ${(props: any) => props.theme.borders};
+
+    display: flex;
+    align-items: center;
 `

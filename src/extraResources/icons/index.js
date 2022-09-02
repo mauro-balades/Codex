@@ -326,6 +326,8 @@ export default {
     { name: 'exe', fileExtensions: ['exe', 'msi'] },
     { name: 'hex', fileExtensions: ['dat', 'bin', 'hex'] },
     { name: 'java', fileExtensions: ['java', 'jsp'] },
+    { name: 'javascript', fileExtensions: ['js', 'js.map'] },
+    { name: 'typescript', fileExtensions: ['ts'] },
     { name: 'jar', fileExtensions: ['jar'] },
     { name: 'javaclass', fileExtensions: ['class'] },
     { name: 'c', fileExtensions: ['c', 'i', 'mi'] },

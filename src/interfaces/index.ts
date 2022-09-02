@@ -15,3 +15,8 @@ export interface FileInformation {
 
     isDir: boolean;
 }
+
+export interface CodeTab {
+    path: string;
+    content: string;
+}

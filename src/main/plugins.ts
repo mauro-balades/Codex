@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import fs_extra from "fs-extra";
 import { Context } from "interfaces";
+import { copyFolderSync } from "./utils";
 
 const DEFAULT_CONFIG = {
     iconsID: "1",
@@ -20,10 +21,7 @@ export function installDefaultPlugins() {
         fs.mkdirSync(icons, { recursive: true });
 
         let icon_resources = path.join(path.dirname(__dirname), 'extraResources', "icons");
-        fs_extra.copy(icon_resources, path.join(icons, "1"), ( (err) => {
-            if (err) throw err;
-            console.log('Icons has been succesfully installed to ' + icons);
-        }));
+        copyFolderSync(icon_resources, path.join(icons, "1"))
 
         let extensions = path.join(plugins_path, "extensions");
         fs.mkdirSync(extensions, { recursive: true });
@@ -49,5 +47,8 @@ export function getIconPack(context: Context) {
     let plugins_path = path.join(app.getPath("userData"), "plugins");
     let icons = path.join(plugins_path, "icons", id);
 
-    return require(path.join(icons, "index.js"));
+    let plugin = require(path.join(icons, "index.js"));
+    plugin.full_path = icons;
+
+    return plugin;
 }

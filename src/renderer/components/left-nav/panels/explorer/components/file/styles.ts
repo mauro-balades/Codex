@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 export const FileWrapper = styled.div`
-    padding: 5px ${(props: any) => props.level + 10}px;
+    padding: 5px ${(props: any) => props.level + (props.information.isDir ? 10 : 30)}px;
     margin: 5px 10px;
 
     border-radius: 5px;
@@ -41,7 +41,7 @@ export const FileWrapper = styled.div`
 
     & img.icon {
         width: 20px;
-        opacity: .6;
+        opacity: ${(props: any) => props.information.isDir ? '.6' : '1'};
         margin-right: 5px;
     }
 `

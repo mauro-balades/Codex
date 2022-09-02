@@ -1,10 +1,11 @@
 import { getFolderContent, resolveHtmlPath } from "./utils";
 
-import {ipcMain, BrowserWindow, app} from 'electron';
-import { CONTEXT_FETCH, CONTEXT_FETCH_CB, FOLDER_CONTENT } from '../constants/ipc';
+import {ipcMain, BrowserWindow, app, protocol} from 'electron';
+import { CLIENT_CREATE_TAB, CONTEXT_FETCH, CONTEXT_FETCH_CB, FOLDER_CONTENT, SERVER_CREATE_TAB } from '../constants/ipc';
 import { Context } from "interfaces/context";
-import { FileInformation } from "interfaces";
+import { CodeTab, FileInformation } from "interfaces";
 import { getIconPack, getSettings, installDefaultPlugins } from "./plugins";
+import fs from "fs";
 
 const path = require('path');
 const url = require('url');
@@ -54,22 +55,40 @@ function createWindow() {
 
     // TODO: move handlers to a different file
     ipcMain.on(CONTEXT_FETCH, (event) => {
-        console.log(context)
         mainWindow?.webContents.send(CONTEXT_FETCH_CB, context)
+    })
+
+    ipcMain.on(SERVER_CREATE_TAB, (_, path: string) => {
+        let data = fs.readFileSync(path, { encoding: 'utf8'});
+        let tab: CodeTab = {
+            path: path,
+            content: data
+        }
+
+        mainWindow?.webContents.send(CLIENT_CREATE_TAB, tab);
     })
 
     ipcMain.handle(FOLDER_CONTENT, async (_, folder): Promise<FileInformation[]> => {
         return await getFolderContent(folder);
     })
 
+    protocol.registerFileProtocol('codex', (request, callback) => {
+        console.log(request.url)
+        const url = request.url.substr(7)
+        callback({ path: url })
+    })
+
+
     console.log(app.getPath("userData"))
 
     // Create default config if non exist
     installDefaultPlugins();
 
-    context.workplace = "./"
+    context.workplace = process.cwd();
     context.config.settings = getSettings();
     context.config.icons = getIconPack(context);
+
+    context.correct = true;
 }
 
 // This method will be called when Electron has finished

@@ -26,6 +26,7 @@ function App() {
     window.electron.ipcRenderer.send(CONTEXT_FETCH, []);
   }, []);
 
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <ContextProvider value={context}>

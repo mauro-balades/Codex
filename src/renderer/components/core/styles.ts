@@ -46,7 +46,7 @@ export const NavigationButton = styled.div`
 export const TabsContainer = styled.div`
     width: 100%;
     height: 30px;
-    padding: 5px;
+    padding: 5px 10px;
 
     background: ${(props: any) => props.theme.background.secondary};
 
@@ -71,7 +71,8 @@ export const TabsContainer = styled.div`
         align-items: center;
 
     }
-      
+
+    & .react-tabs__tab--selected,
     & .react-tabs__tab {
         background: ${(props: any) => props.theme.background.secondary};
         cursor: pointer;
@@ -80,13 +81,46 @@ export const TabsContainer = styled.div`
         display: flex;
         align-items: center;
 
-        width: 150px;
+        min-width: 150px;
+        max-width: 300px;
         border-radius: 5px;
 
         padding: 0 10px;
         margin: 0 5px;
 
+        position: relative;
+
         font-size: 15px;
+        border-right: 1px solid ${(props: any) => props.theme.borders};
+    }
+
+    & .react-tabs__tab:last-child {
+        border-right: none;
+    }
+
+    & .react-tabs__tab span {
+        width: 100%;
+        margin-right: 5px;
+
+        overflow: hidden;
+        white-space:nowrap;
+        text-overflow: ellipsis;
+    }
+
+    & .react-tabs__tab img:first-child {
+        margin-right: 10px;
+    }
+
+    & .react-tabs__tab img:last-child {
+        opacity: 0;
+    }
+
+    & .react-tabs__tab:hover img:last-child {
+        opacity: 1;
+    }
+
+    & .react-tabs__tab img {
+        width: 20px;
     }
 
     & .react-tabs__tab:hover {
@@ -100,4 +134,28 @@ export const TabsContainer = styled.div`
     & .react-tabs__tab:focus {
         outline: none;
     }
+`
+
+export const TopNav = styled.div`
+    width: 100%;
+    height: 35px;
+    padding: 5px 10px;
+
+    background: ${(props: any) => props.theme.background.secondary};
+
+    color: ${(props: any) => props.theme.color.primary};
+    border-bottom: 1px solid ${(props: any) => props.theme.borders};
+
+    padding-left: 20px;
+    // font-size: 20px;
+
+    display: flex;
+    align-items: center;
+`
+
+export const WorkPlaceTitle = styled.div`
+    font-weight: bold;
+    font-size: 17px;
+    opacity: .8;
+
 `

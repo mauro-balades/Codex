@@ -1,7 +1,9 @@
-import { resolveHtmlPath } from "./utils";
+import { getFolderContent, resolveHtmlPath } from "./utils";
 
 import {ipcMain, BrowserWindow, app} from 'electron';
-import { CONTEXT_FETCH, CONTEXT_FETCH_CB } from '../constants/ipc';
+import { CONTEXT_FETCH, CONTEXT_FETCH_CB, FOLDER_CONTENT } from '../constants/ipc';
+import { Context } from "interfaces/context";
+import { FileInformation } from "interfaces";
 
 const path = require('path');
 const url = require('url');
@@ -9,8 +11,9 @@ const url = require('url');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow: BrowserWindow | null;
-var context = {
-    workspace: ""
+var context: Context = {
+    workplace: "",
+    correct: true,
 };
 
 function createWindow() {
@@ -45,11 +48,16 @@ function createWindow() {
     })
 
     // TODO
-    context.workspace = "./"
+    context.workplace = "./"
 
+    // TODO: move handlers to a different file
     ipcMain.on(CONTEXT_FETCH, (event) => {
-        console.log(CONTEXT_FETCH_CB)
-        event.sender.send(CONTEXT_FETCH_CB, context)
+        console.log(context)
+        mainWindow?.webContents.send(CONTEXT_FETCH_CB, context)
+    })
+
+    ipcMain.handle(FOLDER_CONTENT, async (_, folder): Promise<FileInformation[]> => {
+        return await getFolderContent(folder);
     })
 }
 

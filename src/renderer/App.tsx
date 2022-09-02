@@ -8,35 +8,38 @@ import LeftNav from './components/left-nav';
 import Core from './components/core';
 
 import "normalize.css";
-import { Context } from './interfaces/context';
-import { CONTEXT_FETCH, CONTEXT_FETCH_cb } from 'constants/ipc';
+import { Context } from '../interfaces';
+import { CONTEXT_FETCH, CONTEXT_FETCH_CB } from 'constants/ipc';
+import { ContextProvider } from './context';
 
 function App() {
 
-  // TODOt
-
-  const [context, setContext] = useState({});
+  const [context, setContext] = useState({
+    correct: false
+  } as Context);
 
   useEffect(() => {
-    window.electron.ipcRenderer.on(CONTEXT_FETCH_cb, (_: any, new_context: Context) => {
-      console.log(new_context)
+    window.electron.ipcRenderer.on(CONTEXT_FETCH_CB, (new_context: any) => {
       setContext(new_context);
     })
 
     window.electron.ipcRenderer.send(CONTEXT_FETCH, []);
   }, []);
 
-  const CodexContext = React.createContext(context);
   return (
     <ThemeProvider theme={defaultTheme}>
-      <CodexContext.Provider value={context}>
+      <ContextProvider value={context}>
+        {context.correct && (
+          <>
+            <GlobalFont />
 
-        <GlobalFont />
-        <AppWrapper>
-          <LeftNav></LeftNav>
-          <Core />
-        </AppWrapper>
-      </CodexContext.Provider>
+            <AppWrapper>
+                <LeftNav></LeftNav>
+                <Core />
+            </AppWrapper>
+          </>
+        )}
+      </ContextProvider>
     </ThemeProvider>
   );
 }

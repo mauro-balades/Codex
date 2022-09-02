@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 release/app/dist
 dll/
+release/app/node_modules/

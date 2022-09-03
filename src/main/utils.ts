@@ -13,7 +13,6 @@ export async function getFolderContent(folder: any): Promise<FileInformation[]> 
         for( const file of files ) {
             // Get the full paths
             const fromPath = path.join( folder, file );
-            console.log(fromPath)
 
             // Stat the file to see if we have a file or dir
             const stat = await fs.promises.stat( fromPath );

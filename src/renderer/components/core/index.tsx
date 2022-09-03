@@ -1,4 +1,4 @@
-import { MainContent, TabsContainer, NavigationButton, TopNav, WorkPlaceTitle } from "./styles"
+import { MainContent, TabsContainer, NavigationButton, TopNav, WorkPlaceTitle, CodeWrapper } from "./styles"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useRef, useState } from "react";
 import { getIcon } from "renderer/utils";
@@ -9,35 +9,28 @@ import ContextProvider from "renderer/context";
 import path from "path";
 import { useEffect } from "react";
 import { CLIENT_CREATE_TAB } from "constants/ipc";
-import { CodeTab } from "interfaces";
+import { CodeTab, Context } from "interfaces";
 
-import Editor, { loader } from "@monaco-editor/react";
-
-loader.config({
-    paths: {
-      vs: '/monaco-editor/min/vs'
-    }
-});
+import Editor from "./editor";
 
 export default (props: any) => {
 
     const [currentTabs, setCurrentTabs] = useState([] as Array<CodeTab>);
-    const editorRef = useRef(null);
+    const [tabIndex, setTabIndex] = useState(0);
 
-    let context: any = React.useContext(ContextProvider);
+    let context: Context = React.useContext(ContextProvider);
 
     useEffect(() => {
         window.electron.ipcRenderer.on(CLIENT_CREATE_TAB, (tab: any) => {
 
             // @ts-ignore
-            setCurrentTabs((oldArray: any) => [...oldArray, tab as CodeTab])
+            setCurrentTabs((oldArray: any) => {
+                console.log(oldArray.length)
+                setTabIndex(oldArray.length);
+                return [...oldArray, tab as CodeTab]
+            })
         })
-    }, [])
-
-    function handleEditorDidMount(editor: any, monaco: any) {
-        editorRef.current = editor;
-    }
-
+    }, []);
 
     return (
         <MainContent>
@@ -46,7 +39,7 @@ export default (props: any) => {
                     {path.basename(context.workplace)}-main
                 </WorkPlaceTitle>
             </TopNav>
-            <Tabs>
+            <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                 <TabsContainer>
                     <NavigationButton>
                         <svg height="25" width="25" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -69,11 +62,9 @@ export default (props: any) => {
                 {
                     currentTabs.map((tab: CodeTab) => (
                         <TabPanel>
-                            <Editor
-                                defaultLanguage="json"
-                                defaultValue={tab.content}
-                                onMount={handleEditorDidMount}
-                            />
+                            <CodeWrapper>
+                                <Editor tab={tab} />
+                            </CodeWrapper>
                         </TabPanel>
                     ))
                 }

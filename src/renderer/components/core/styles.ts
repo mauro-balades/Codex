@@ -5,6 +5,7 @@ export const MainContent = styled.section`
     width: 100%;
     height: 100%;
 
+
     background: ${(props: any) => props.theme.background.primary};
 
     & .react-tabs {
@@ -31,6 +32,10 @@ export const NavigationButton = styled.div`
     align-items: center;
     opacity: .7;
 
+    &:first-child {
+        margin-left: 10px;
+    }
+
     cursor: pointer;
 
     &:hover,
@@ -46,7 +51,7 @@ export const NavigationButton = styled.div`
 export const TabsContainer = styled.div`
     width: 100%;
     height: 30px;
-    padding: 5px 10px;
+    padding: 5px 0;
 
     background: ${(props: any) => props.theme.background.secondary};
 
@@ -70,6 +75,7 @@ export const TabsContainer = styled.div`
         display: flex;
         align-items: center;
 
+        user-select: none;
     }
 
     & .react-tabs__tab--selected,
@@ -158,4 +164,26 @@ export const WorkPlaceTitle = styled.div`
     font-size: 17px;
     opacity: .8;
 
+`
+
+export const CodeWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    & .minimap {
+        border-left: 1px solid ${(props: any) => props.theme.borders};
+    }
+`
+
+export const EditorBottomNav = styled.div`
+    width: 100%;
+    height: 10%;
+    padding: 0 10px;
+
+    background: ${(props: any) => props.theme.background.secondary};
+
+    color: ${(props: any) => props.theme.color.primary};
+    border-top: 1px solid ${(props: any) => props.theme.borders};
 `

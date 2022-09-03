@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { ThemeProvider } from "styled-components";
-import { defaultTheme } from './themes';
+import { darkTheme, defaultTheme } from './themes';
 
 import { AppWrapper, GlobalFont } from './components/layout';
 import LeftNav from './components/left-nav';

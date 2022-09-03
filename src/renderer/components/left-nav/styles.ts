@@ -2,8 +2,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.section`
-    max-width: 400px;
-    width: 400px;
+    max-width: 350px;
+    min-width: 300px;
     height: calc(100% - 6.5rem);
 
     position: relative;
@@ -16,6 +16,7 @@ export const Panels = styled.div`
     height: 100%;
     width: 100%;
     background: ${(props: any) => props.theme.background.secondary};
+    border-right: 1px solid ${(props: any) => props.theme.borders};
 
     overflow-y: auto;
 `

@@ -17,7 +17,6 @@ export const getIcon = (filename: string, context: Context, isDir: boolean = fal
     let icons = context.config.icons.default;
     let icon_list = icons.icons;
     for (let icon of icon_list) {
-        console.log(icon.fileExtensions && icon.fileExtensions.indexOf(getExtension(filename)) != -1)
         if ((icon.fileNames && icon.fileNames.indexOf(filename) != -1) ||
         (icon.fileExtensions && icon.fileExtensions.indexOf(getExtension(filename)) != -1)) {
             return "codex://" + path.join(context.config.icons.full_path, "icons", icon.name + ".svg")

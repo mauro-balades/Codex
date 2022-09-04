@@ -1,15 +1,11 @@
 import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalFont = createGlobalStyle`
-@font-face {
-    font-family: ${(props: any) => props.theme.font.family};
-    src: ${(props: any) => props.theme.font.url};
-}
+@import url('${(props: any) => props.theme.font.url}');
 `;
 
 
 export const AppWrapper = styled.div`
-    font-family: ${(props: any) => props.theme.font.family};
 
     width: 100%;
     height: 100vh;
@@ -19,4 +15,6 @@ export const AppWrapper = styled.div`
     display: flex;
 
     overflow: hidden;
+
+    font-family: ${(props: any) => props.theme.font.family};
 `

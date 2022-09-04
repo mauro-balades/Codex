@@ -35,8 +35,8 @@ function App() {
             <GlobalFont />
 
             <AppWrapper>
-                <LeftNav></LeftNav>
-                <Core />
+              <LeftNav></LeftNav>
+              <Core />
             </AppWrapper>
           </>
         )}

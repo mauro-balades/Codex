@@ -12,8 +12,8 @@ export const defaultTheme = {
     },
     borders: "#E4E4E6",
     font: {
-        url: "https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap",
-        family: "'Roboto', sans-serif"
+        url: "https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap",
+        family: "'Poppins', sans-serif"
     },
     editor: {
         "base": "vs",
@@ -141,20 +141,6 @@ export const defaultTheme = {
     }
 }
 
-// export const defaultTheme = {
-//     background: {
-//         primary: "#23292E",
-//         secondary: "#1E1E1E"
-//     },
-//     color: {
-//         accent: "#2295FF",
-//         primary: "#fff"
-//     },
-//     font: {
-//         url: "https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap",
-//         family: "'Poppins', sans-serif"
-//     }
-// }
 
 export const darkTheme = {
     background: {
@@ -168,8 +154,8 @@ export const darkTheme = {
     },
     borders: "#3e3f41",
     font: {
-        url: "https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap",
-        family: "'Roboto', sans-serif"
+        url: "https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap",
+        family: "'Poppins', sans-serif"
     },
     editor: {
         "base": "vs",

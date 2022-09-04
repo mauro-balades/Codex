@@ -110,6 +110,8 @@ export const TabsContainer = styled.div`
         width: 100%;
         margin-right: 5px;
 
+        opacity: .7;
+
         overflow: hidden;
         white-space:nowrap;
         text-overflow: ellipsis;
@@ -217,3 +219,21 @@ export const BottomNavIcon = styled.div`
     }
 `
 
+export const BottonNavInformation = styled.div`
+    margin: 0 50px 0 auto;
+    display: flex;
+    align-items: center;
+`
+
+export const BottomInfoBtn = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+
+    font-size: 14px;
+
+    & span {
+        line-height: 2;
+    }
+`

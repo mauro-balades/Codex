@@ -3,26 +3,28 @@ import styled from "styled-components";
 
 export const MainContent = styled.section`
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+    max-height: 100vh;
 
+    display: flex;
+    flex-direction: column;
 
     background: ${(props: any) => props.theme.background.primary};
 
     & .react-tabs {
-        -webkit-tap-highlight-color: transparent;
         height: 100%;
+        -webkit-tap-highlight-color: transparent;
     }
 
     & .react-tabs__tab-panel {
         display: none;
-        height: 100%;
         width: 100%;
 
         border-top: ${(props: any) => props.theme.borders};
-
     }
 
     & .react-tabs__tab-panel--selected {
+        height: calc(100% - 30px);
         display: block;
     }
 `
@@ -143,7 +145,6 @@ export const TabsContainer = styled.div`
 `
 
 export const TopNav = styled.div`
-    width: 100%;
     height: 35px;
     padding: 5px 10px;
 
@@ -168,9 +169,13 @@ export const WorkPlaceTitle = styled.div`
 
 export const CodeWrapper = styled.div`
     width: 100%;
-    height: 100%;
+    height: calc(100% - 50px);
 
     position: relative;
+
+    & > section {
+        overflow: hidden;
+    }
 
     & .minimap {
         border-left: 1px solid ${(props: any) => props.theme.borders};
@@ -179,11 +184,36 @@ export const CodeWrapper = styled.div`
 
 export const EditorBottomNav = styled.div`
     width: 100%;
-    height: 10%;
-    padding: 0 10px;
+    height: 35px;
+    padding: 0 20px;
 
-    background: ${(props: any) => props.theme.background.secondary};
+    background: ${(props: any) => props.theme.background.primary};
 
     color: ${(props: any) => props.theme.color.primary};
     border-top: 1px solid ${(props: any) => props.theme.borders};
+
+    display: flex;
+    align-items: center;
 `
+
+export const BottomNavIcon = styled.div`
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    font-weight: 500;
+    opacity: .7;
+
+    user-select: none;
+
+    & svg {
+        width: 20px;
+        height: 20px;
+
+        margin-right: 5px;
+    }
+
+    & span {
+        line-height: 2;
+    }
+`
+

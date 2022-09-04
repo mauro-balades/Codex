@@ -4,7 +4,6 @@ import styled from "styled-components";
 export const Wrapper = styled.section`
     max-width: 350px;
     min-width: 300px;
-    height: calc(100% - 6.5rem);
 
     position: relative;
 
@@ -13,7 +12,6 @@ export const Wrapper = styled.section`
 `
 
 export const Panels = styled.div`
-    height: 100%;
     width: 100%;
     background: ${(props: any) => props.theme.background.secondary};
     border-right: 1px solid ${(props: any) => props.theme.borders};
@@ -22,8 +20,6 @@ export const Panels = styled.div`
 `
 
 export const TabsContainer = styled.div`
-    height: 100%;
-
     background: ${(props: any) => props.theme.background.secondary};
 
     color: ${(props: any) => props.theme.color.primary};

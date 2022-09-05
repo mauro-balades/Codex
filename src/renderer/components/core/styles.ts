@@ -148,7 +148,7 @@ export const TabsContainer = styled.div`
 
 export const TopNav = styled.div`
     height: 35px;
-    padding: 5px 10px;
+    padding: 6px 10px;
 
     background: ${(props: any) => props.theme.background.secondary};
 

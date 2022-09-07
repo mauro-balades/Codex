@@ -21,10 +21,12 @@ export default ({tab}: any) => {
     });
 
     function handleEditorDidMount(editor: any, monaco: Monaco) {
-        editorRef.current = editor;
         monaco.editor.defineTheme('user-theme', theme.editor);
+        editorRef.current = editor;
 
-        const model = editor.getModel();
+        const model = monaco.editor.createModel(tab.context.content, undefined, monaco.Uri.file(tab.context.path));
+        editor.setModel(model);
+
         let options = model.getOptions();
         setTabWith(options.indentSize)
 
@@ -60,8 +62,8 @@ export default ({tab}: any) => {
             <div style={{ height: '100%', overflow: 'hidden' }}>
                 <Editor
                     theme="user-theme"
-                    defaultLanguage="javascript"
-                    defaultValue={tab.content}
+                    defaultLanguage="text"
+                    defaultValue={tab.context.content}
                     onMount={handleEditorDidMount}
                 />
             </div>

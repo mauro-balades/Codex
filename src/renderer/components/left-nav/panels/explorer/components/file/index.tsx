@@ -1,5 +1,5 @@
 import { getIcon } from "renderer/utils";
-import { FileWrapper } from "./styles";
+import { FileWrapper, StructureLine } from "./styles";
 
 import CLOSE_ICON from "../../../../../../../../assets/svg/close.svg";
 import { useState } from "react";
@@ -37,7 +37,10 @@ function File({information, level = 0}: any) {
                     {/* <img className="close" src={CLOSE_ICON} alt="" /> */}
                 </FileWrapper>
                 {!isClosed && (
-                    <Structure level={level + 10} path={information.path} />
+                    <div style={{ position: 'relative' }}>
+                        <Structure level={level + 10} path={information.path} />
+                        <StructureLine level={level + 10}></StructureLine>
+                    </div>
                 )}
             </>
         )

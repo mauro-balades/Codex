@@ -1,8 +1,10 @@
 
 import styled from "styled-components";
+import { hexToCSSFilter } from 'hex-to-css-filter';
 
 export const FileWrapper = styled.div`
-    padding: 5px ${(props: any) => props.level + (props.information.isDir ? 10 : 30)}px;
+    padding: 5px 5px 5px ${(props: any) => props.level + (props.information.isDir ? 10 : (
+        props.level == 0 ? 5 : 30))}px;
     margin: 5px 10px;
 
     border-radius: 5px;
@@ -18,6 +20,12 @@ export const FileWrapper = styled.div`
         width: 12px;
         margin-right: 5px;
         transform: rotate(${(props: any) => props.closed ? '0' : '90'}deg);
+    }
+
+    & span {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     & .close {
@@ -43,5 +51,23 @@ export const FileWrapper = styled.div`
         width: 20px;
         opacity: ${(props: any) => props.information.isDir ? '.6' : '1'};
         margin-right: 5px;
+
+
+        ${(props: any) => `
+            ${(props.information.isDir && (!props.closed)) ? `
+                opacity: .9;
+                filter: ${hexToCSSFilter(props.theme.color.accent).filter};
+            ` : ""}
+        `}
     }
+`
+
+export const StructureLine = styled.div`
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background: ${(props: any) => props.theme.borders};
+
+    top: 0;
+    left: ${(props: any) => props.level + 15}px;
 `

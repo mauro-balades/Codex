@@ -3,7 +3,7 @@ import { getFolderContent, resolveHtmlPath } from "./utils";
 import {ipcMain, BrowserWindow, app, protocol} from 'electron';
 import { CLIENT_CREATE_TAB, CONTEXT_FETCH, CONTEXT_FETCH_CB, FOLDER_CONTENT, SERVER_CREATE_TAB } from '../constants/ipc';
 import { Context } from "interfaces/context";
-import { CodeTab, FileInformation } from "interfaces";
+import { XCodeTab, FileInformation } from "interfaces";
 import { getIconPack, getSettings, installDefaultPlugins } from "./plugins";
 import fs from "fs";
 
@@ -13,6 +13,7 @@ const url = require('url');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow: BrowserWindow | null;
+var splash: BrowserWindow | null;
 var context: Context = {
     workplace: "",
     correct: false,
@@ -26,6 +27,7 @@ function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 800, height: 600,
+        show: false,
         webPreferences: {
             nodeIntegration: true,
             preload: app.isPackaged ? path.join(__dirname, 'preload.js')
@@ -34,6 +36,11 @@ function createWindow() {
     });
 
     // and load the index.html of the app.
+
+    splash = new BrowserWindow({width: 310, height: 410, frame: false, alwaysOnTop: true});
+    console.log(__dirname)
+    splash.loadURL(`file://${__dirname}/../splash/index.html`);
+
     mainWindow.loadURL(resolveHtmlPath('index.html'));
 
     // Open the DevTools.
@@ -47,6 +54,13 @@ function createWindow() {
         mainWindow = null
     })
 
+    // if main window is ready to show, then destroy the splash window and show up the main window
+    mainWindow.once('ready-to-show', () => {
+      splash.destroy();
+      mainWindow.show();
+    });
+
+
     ipcMain.on('set-title', (event, title) => {
         const webContents = event.sender
         const win = BrowserWindow.fromWebContents(webContents)
@@ -58,11 +72,16 @@ function createWindow() {
         mainWindow?.webContents.send(CONTEXT_FETCH_CB, context)
     })
 
-    ipcMain.on(SERVER_CREATE_TAB, (_, path: string) => {
-        let data = fs.readFileSync(path, { encoding: 'utf8'});
-        let tab: CodeTab = {
-            path: path,
-            content: data
+    ipcMain.on(SERVER_CREATE_TAB, (_, _path: string) => {
+        let data = fs.readFileSync(_path, { encoding: 'utf8'});
+        let tab: XCodeTab = {
+            context: {
+                path: _path,
+                content: data,
+                isFileTab: true,
+            },
+            component: undefined,
+            name: path.basename(_path)
         }
 
         mainWindow?.webContents.send(CLIENT_CREATE_TAB, tab);

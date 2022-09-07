@@ -374,7 +374,7 @@ class Uri extends URI {
     }
 }
 // reserved characters: https://tools.ietf.org/html/rfc3986#section-2.2
-const encodeTable = {
+const enXCodeTable = {
     [58 /* CharCode.Colon */]: '%3A',
     [47 /* CharCode.Slash */]: '%2F',
     [63 /* CharCode.QuestionMark */]: '%3F',
@@ -425,7 +425,7 @@ function encodeURIComponentFast(uriComponent, allowSlash) {
                 res = uriComponent.substr(0, pos);
             }
             // check with default table first
-            const escaped = encodeTable[code];
+            const escaped = enXCodeTable[code];
             if (escaped !== undefined) {
                 // check if we are delaying native encode
                 if (nativeEncodePos !== -1) {
@@ -454,7 +454,7 @@ function encodeURIComponentMinimal(path) {
             if (res === undefined) {
                 res = path.substr(0, pos);
             }
-            res += encodeTable[code];
+            res += enXCodeTable[code];
         }
         else {
             if (res !== undefined) {

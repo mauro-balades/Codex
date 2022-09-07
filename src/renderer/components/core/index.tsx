@@ -4,18 +4,18 @@ import { useRef, useState } from "react";
 import { getIcon } from "renderer/utils";
 
 import CLOSE_ICON from "../../../../assets/svg/close.svg";
-import React from "react";
+import React, { Component } from "react";
 import ContextProvider from "renderer/context";
 import path from "path";
 import { useEffect } from "react";
 import { CLIENT_CREATE_TAB } from "constants/ipc";
-import { CodeTab, Context } from "interfaces";
-
+import { XCodeTab, Context } from "interfaces";
+import createReactClass from 'create-react-class';
 import Editor from "./editor";
 
 export default (props: any) => {
 
-    const [currentTabs, setCurrentTabs] = useState([] as Array<CodeTab>);
+    const [currentTabs, setCurrentTabs] = useState([] as Array<XCodeTab>);
     const [tabIndex, setTabIndex] = useState(0);
 
     let context: Context = React.useContext(ContextProvider);
@@ -23,11 +23,22 @@ export default (props: any) => {
     useEffect(() => {
         window.electron.ipcRenderer.on(CLIENT_CREATE_TAB, (tab: any) => {
 
+            if (tab.context.isFileTab) {
+                    // @ts-ignroe
+                    tab.component = createReactClass({
+                        render: function() {return (
+                        <CodeWrapper>
+                            <Editor tab={tab} />
+                        </CodeWrapper>
+                    )}
+                })
+            }
+
             // @ts-ignore
             setCurrentTabs((oldArray: any) => {
                 console.log(oldArray.length)
                 setTabIndex(oldArray.length);
-                return [...oldArray, tab as CodeTab]
+                return [...oldArray, tab as XCodeTab]
             })
         })
     }, []);
@@ -49,10 +60,10 @@ export default (props: any) => {
                     </NavigationButton>
                     <TabList>
                         {
-                            currentTabs.map((tab: CodeTab) => (
+                            currentTabs.map((tab: XCodeTab) => (
                                 <Tab>
-                                    <img src={getIcon(path.basename(tab.path), context)} alt="" />
-                                    <span>{path.basename(tab.path)}</span>
+                                    <img src={getIcon(tab.name, context)} alt="" />
+                                    <span>{tab.name}</span>
                                     <img src={CLOSE_ICON} alt="" />
                                 </Tab>
                             ))
@@ -60,11 +71,9 @@ export default (props: any) => {
                     </TabList>
                 </TabsContainer>
                 {
-                    currentTabs.map((tab: CodeTab) => (
+                    currentTabs.map((tab: any) => (
                         <TabPanel>
-                            <CodeWrapper>
-                                <Editor tab={tab} />
-                            </CodeWrapper>
+                            <tab.component />
                         </TabPanel>
                     ))
                 }

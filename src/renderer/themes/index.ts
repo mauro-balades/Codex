@@ -7,8 +7,9 @@ export const defaultTheme = {
         hover: "#E4E4E6"
     },
     color: {
-        accent: "#3B71F0",
-        primary: "#000"
+        accent: "#0A84FF",
+        primary: "#000",
+        secondary: "rgba(0, 0, 0, .55)",
     },
     borders: "#E4E4E6",
     font: {

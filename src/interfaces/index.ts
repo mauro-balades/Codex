@@ -1,3 +1,4 @@
+import React from "react";
 
 export interface Context {
     workplace: string;
@@ -16,7 +17,14 @@ export interface FileInformation {
     isDir: boolean;
 }
 
-export interface CodeTab {
+export interface TabContext {
     path: string;
     content: string;
+    isFileTab: boolean;
+}
+
+export interface XCodeTab {
+    name: string;
+    context: TabContext;
+    component: React.Component | undefined;
 }

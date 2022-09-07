@@ -54,18 +54,51 @@ export const TabsContainer = styled.div`
         width: 100%;
         cursor: pointer;
 
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
+
+        display: flex;
 
         justify-content: center;
         align-items: center;
 
         position: relative;
-        opacity: .6;
+        color: ${(props: any) => props.theme.color.secondary};
+    }
+
+    & .react-tabs__tab svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    & .react-tabs__tab svg.medium {
+        width: 18px;
+        height: 18px;
+    }
+
+    & .react-tabs__tab svg.large {
+        width: 23px;
+        height: 23px;
+    }
+
+    & .react-tabs__tab .default {
+        display: block;
+    }
+
+    & .react-tabs__tab .active {
+        display: none;
     }
 
     & .react-tabs__tab:hover {
         color: ${(props: any) => props.theme.color.accent};
+    }
+
+    & .react-tabs__tab--selected .default {
+        display: none;
+    }
+
+    & .react-tabs__tab--selected .active {
+        display: block;
     }
 
     & .react-tabs__tab--selected {

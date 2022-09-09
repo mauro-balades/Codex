@@ -15,9 +15,7 @@ import Editor from "./editor";
 
 export default (props: any) => {
 
-    const [currentTabs, setCurrentTabs] = useState([] as Array<XCodeTab>);
-    const [tabIndex, setTabIndex] = useState(0);
-
+    const {currentTabs, setCurrentTabs, tabIndex, setTabIndex} = props;
     let context: Context = React.useContext(ContextProvider);
 
     useEffect(() => {

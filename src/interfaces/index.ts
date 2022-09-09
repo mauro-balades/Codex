@@ -18,8 +18,8 @@ export interface FileInformation {
 }
 
 export interface TabContext {
-    path: string;
-    content: string;
+    path: string | undefined;
+    content: string | undefined;
     isFileTab: boolean;
 }
 

@@ -63,3 +63,22 @@ export const VersionControl = (props: any) => (
         <path d="M7.81226 10.8067L8.68237 9.68173L8.75269 9.72567C10.7566 11.0089 13.1121 13.9532 13.1121 16.0186V20.9405C13.1121 21.6085 13.4285 21.96 13.991 21.96C14.5623 21.96 14.8787 21.6085 14.8787 20.9405V16.0186C14.8787 13.9532 17.2341 11.0089 19.238 9.72567L19.2732 9.7081L20.0642 10.7979C20.4597 11.3517 20.9783 11.2022 21.1892 10.5606L22.3406 7.10653C22.5164 6.57919 22.2263 6.18368 21.6814 6.19247L18.0339 6.22763C17.366 6.23642 17.0759 6.68466 17.4626 7.22079L18.2185 8.2579C16.3113 9.55868 14.3513 12.0196 14.0085 13.3995H13.9822C13.6306 12.0108 11.6794 9.56747 9.78101 8.26669L10.5105 7.31747C10.9236 6.79013 10.6423 6.3331 9.96558 6.30673L6.3269 6.15731C5.78198 6.13974 5.48315 6.52645 5.64136 7.0538L6.68726 10.5343C6.88062 11.1847 7.39038 11.3517 7.81226 10.8067Z" fill="currentColor"/>
     </svg>
 )
+
+// Welcome Icons
+export const WelcomeFolder = (props: any) => (
+    <svg {...props} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+    </svg>
+)
+
+export const WelcomeNewFile = (props: any) => (
+    <svg {...props} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+)
+
+export const WelcomeOpenFile = (props: any) => (
+    <svg {...props} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+    </svg>
+)

@@ -8,9 +8,10 @@ import LeftNav from './components/left-nav';
 import Core from './components/core';
 
 import "normalize.css";
-import { Context } from '../interfaces';
+import { Context, XCodeTab } from '../interfaces';
 import { CONTEXT_FETCH, CONTEXT_FETCH_CB } from 'constants/ipc';
 import { ContextProvider } from './context';
+import Extra from './components/extra';
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
     window.electron.ipcRenderer.send(CONTEXT_FETCH, []);
   }, []);
 
+  const [currentTabs, setCurrentTabs] = useState([] as Array<XCodeTab>);
+  const [tabIndex, setTabIndex] = useState(0);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -36,7 +39,9 @@ function App() {
 
             <AppWrapper>
               <LeftNav></LeftNav>
-              <Core />
+              <Core {...{tabIndex, setTabIndex, currentTabs, setCurrentTabs}} />
+
+              <Extra {...{tabIndex, setTabIndex, currentTabs, setCurrentTabs}} />
             </AppWrapper>
           </>
         )}

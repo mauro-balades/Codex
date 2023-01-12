@@ -8,7 +8,7 @@ import LeftNav from './components/left-nav';
 import Core from './components/core';
 
 import "normalize.css";
-import { Context, XCodeTab } from '../interfaces';
+import { Context, XCodeTab, XCodeTabWindow } from '../interfaces';
 import { CONTEXT_FETCH, CONTEXT_FETCH_CB } from 'constants/ipc';
 import { ContextProvider } from './context';
 import Extra from './components/extra';
@@ -28,6 +28,7 @@ function App() {
   }, []);
 
   const [currentTabs, setCurrentTabs] = useState([] as Array<XCodeTab>);
+  const [currentWindows, setCurrentWindows] = useState([] as Array<XCodeTabWindow>);
   const [tabIndex, setTabIndex] = useState(0);
 
   return (
@@ -39,9 +40,8 @@ function App() {
 
             <AppWrapper>
               <LeftNav></LeftNav>
-              <Core {...{tabIndex, setTabIndex, currentTabs, setCurrentTabs}} />
-
-              <Extra {...{tabIndex, setTabIndex, currentTabs, setCurrentTabs}} />
+              <Core {...{tabIndex, setTabIndex, currentTabs, setCurrentTabs, currentWindows, setCurrentWindows}} />
+              <Extra {...{tabIndex, setTabIndex, currentTabs, setCurrentTabs, currentWindows, setCurrentWindows}} />
             </AppWrapper>
           </>
         )}

@@ -21,10 +21,17 @@ export interface TabContext {
     path: string | undefined;
     content: string | undefined;
     isFileTab: boolean;
+    windowID: number | undefined;
 }
 
 export interface XCodeTab {
     name: string;
     context: TabContext;
     component: React.Component | undefined;
+
+    ID: number;
+}
+
+export interface XCodeTabWindow {
+    ID: number;
 }

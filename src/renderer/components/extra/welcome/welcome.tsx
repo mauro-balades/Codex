@@ -22,7 +22,7 @@ export default class extends TabPlugin {
             <>
                 <Wrapper>
                     <Title>CodeX</Title>
-                    <SubTitle>Powerfull Editing Tools</SubTitle>
+                    <SubTitle>Powerful Editing Tools</SubTitle>
 
                     <SectionTitle>Start</SectionTitle>
                     <SectionLine>

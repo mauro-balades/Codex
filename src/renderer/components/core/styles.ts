@@ -9,7 +9,7 @@ export const MainContent = styled.section`
     display: flex;
     flex-direction: column;
 
-    background: ${(props: any) => props.theme.background.primary};
+    background: ${(props: any) => props.theme.background.secondary};
 
     & .react-tabs {
         height: 100%;
@@ -52,10 +52,6 @@ export const NavigationButton = styled.div`
 
 export const TabsContainer = styled.div`
     width: 100%;
-    height: 30px;
-    padding: 5px 0;
-
-    background: ${(props: any) => props.theme.background.secondary};
 
     color: ${(props: any) => props.theme.color.primary};
     border-bottom: 1px solid ${(props: any) => props.theme.borders};
@@ -74,6 +70,8 @@ export const TabsContainer = styled.div`
         padding: 0;
         height: 100%;
 
+        margin: 0;
+
         display: flex;
         align-items: center;
 
@@ -82,28 +80,49 @@ export const TabsContainer = styled.div`
 
     & .react-tabs__tab--selected,
     & .react-tabs__tab {
-        background: ${(props: any) => props.theme.background.secondary};
         cursor: pointer;
-        height: 100%;
+        // height: 100%;
 
         display: flex;
         align-items: center;
 
         min-width: 150px;
         max-width: 300px;
-        border-radius: 5px;
 
-        padding: 0 10px;
-        margin: 0 5px;
+        padding: 5px 10px;
 
         position: relative;
+        border-radius: 5px;
 
         font-size: 15px;
-        border-right: 1px solid ${(props: any) => props.theme.borders};
-    }
 
-    & .react-tabs__tab:last-child {
-        border-right: none;
+
+        &:last-child {
+            &::after {
+
+                position: absolute;
+
+                content: '';
+                top: 50%;
+                right: 0;
+
+                height: 20px;
+                width: 1px;
+                transform: translate(0, -50%);
+
+                background: ${(props: any) => props.theme.borders};
+            }
+
+        }
+
+        &:hover {
+            background: ${(props: any) => props.theme.background.secondary} !important;
+        }
+
+        &:hover::after,
+        &:hover::before {
+            display: none;
+        }
     }
 
     & .react-tabs__tab span {
@@ -146,6 +165,23 @@ export const TabsContainer = styled.div`
     }
 `
 
+export const TabWindowWrapper = styled.div`
+    height: 100%;
+
+    position: relative;
+    overflow: hidden;
+`
+
+export const TabWindow = styled.div`
+    border: 1px solid ${(props: any) => props.theme.borders};
+    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+
+    height: 100%;
+    background: ${(props: any) => props.theme.background.primary};
+`
+
 export const TopNav = styled.div`
     height: 35px;
     padding: 6px 10px;
@@ -153,7 +189,7 @@ export const TopNav = styled.div`
     background: ${(props: any) => props.theme.background.secondary};
 
     color: ${(props: any) => props.theme.color.primary};
-    border-bottom: 1px solid ${(props: any) => props.theme.borders};
+    // border-bottom: 1px solid ${(props: any) => props.theme.borders};
 
     padding-left: 20px;
     // font-size: 20px;
@@ -181,6 +217,15 @@ export const CodeWrapper = styled.div`
 
     & .minimap {
         border-left: 1px solid ${(props: any) => props.theme.borders};
+    }
+
+    & .monaco-editor .line-numbers.active-line-number::after {
+        content: '';
+        position: absolute;
+        background: #000;
+        width: 100%;
+        height: 100%;
+        left: 60%;
     }
 `
 
@@ -231,9 +276,21 @@ export const BottomInfoBtn = styled.div`
     justify-content: center;
     margin: 0 10px;
 
+    cursor: pointer;
+    user-select: none;
+
     font-size: 14px;
 
     & span {
         line-height: 2;
     }
+`
+
+export const TabContainerList = styled.div`
+    width: 100%;
+    height: 40px;
+
+    overflow: overlay;
+
+    // TODO: edit scroll bar
 `

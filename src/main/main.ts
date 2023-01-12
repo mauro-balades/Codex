@@ -28,6 +28,8 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800, height: 600,
         show: false,
+        transparent: true,
+        frame: true,
         webPreferences: {
             nodeIntegration: true,
             preload: app.isPackaged ? path.join(__dirname, 'preload.js')

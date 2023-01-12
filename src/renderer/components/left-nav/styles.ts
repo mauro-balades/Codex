@@ -6,6 +6,7 @@ export const Wrapper = styled.section`
     min-width: 325px;
 
     position: relative;
+    padding: 0 10px;
 
     background: ${(props: any) => props.theme.background.secondary};
     // border-right: 1px solid ${(props: any) => props.theme.borders};

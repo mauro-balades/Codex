@@ -34,4 +34,5 @@ export interface XCodeTab {
 
 export interface XCodeTabWindow {
     ID: number;
+    currentTab: number;
 }

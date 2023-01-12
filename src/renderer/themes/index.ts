@@ -131,7 +131,7 @@ export const defaultTheme = {
         ],
         "colors": {
             "editor.foreground": "#000000",
-            "editor.background": "#FFFFFF",
+            "editor.background": "#FCFCFC",
             "editor.selectionBackground": "#BDD5FC",
             "editor.lineHighlightBackground": "#F4F4F4",
             "editorCursor.foreground": "#000000",

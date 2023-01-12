@@ -11,7 +11,7 @@ export default class extends TabPlugin {
         if (ctx.currentTabs.length == 0) {
             let tab = ctx.createTabInstance("Welcome");
             tab.component = this.component();
-    
+
             ctx.createNewTab(tab);
         }
     }

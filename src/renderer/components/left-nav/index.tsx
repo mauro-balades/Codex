@@ -6,7 +6,7 @@ export default (props: any) => {
 
     return (
         <Wrapper>
-            <TopNav></TopNav>
+            <TopNav>TODO: search thing here</TopNav>
             <Explorer {...props} />
         </Wrapper>
     )

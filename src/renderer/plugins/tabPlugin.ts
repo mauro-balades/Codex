@@ -3,9 +3,6 @@ import { Context, XCodeTab, XCodeTabWindow } from "interfaces/index";
 export class TabPluginContext {
     public context: Context;
 
-    private tabIndex;
-    private setTabIndex;
-
     public currentTabs;
     private setCurrentTabs;
 
@@ -13,16 +10,12 @@ export class TabPluginContext {
     private setCurrentWindows;
 
     constructor(props: {
-            tabIndex: number,
-            setTabIndex: (i: number) => void,
             currentTabs: XCodeTab[],
             setCurrentTabs: (t: XCodeTab[]) => void,
             currentWindows: XCodeTabWindow[],
             setCurrentWindows: (w: XCodeTabWindow[]) => void,
         }) {
 
-        this.tabIndex = props.tabIndex;
-        this.setTabIndex = props.setTabIndex;
         this.currentTabs = props.currentTabs;
         this.setCurrentTabs = props.setCurrentTabs;
 
@@ -31,10 +24,11 @@ export class TabPluginContext {
     }
 
     createWindowIfNoneExists() {
-        if (this.currentWindows.length === 0) {
+        if (this.currentWindows.length <= 0) {
             this.setCurrentWindows([
                 {
-                    ID: 1
+                    ID: 1,
+                    currentTab: 0,
                 }
             ])
         }
@@ -46,7 +40,7 @@ export class TabPluginContext {
                 path: undefined,
                 content: undefined,
                 isFileTab: false,
-                windowID: this.currentWindows.length == 0 ? 1 : (this.currentWindows.length-1)
+                windowID: this.currentWindows.length == 0 ? 1 : (this.currentWindows.length)
             },
             component: undefined,
             name: name
@@ -57,10 +51,13 @@ export class TabPluginContext {
 
     createNewTab(tab: XCodeTab) {
         this.createWindowIfNoneExists();
+        this.setCurrentTabs((oldArray: XCodeTab[]) => {
+            let win = this.currentWindows.find((x: XCodeTabWindow) => x.ID === tab.context.windowID) as XCodeTabWindow;
+            win.currentTab = oldArray.length;
 
-        this.setCurrentTabs((oldArray: any) => {
-            this.setTabIndex(oldArray.length);
+            tab.context.windowID = win.ID;
             tab.ID = oldArray.length;
+
             return [...oldArray, tab]
         });
     }

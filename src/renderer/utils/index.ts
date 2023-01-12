@@ -1,5 +1,5 @@
 import { Context } from "interfaces";
-import FOLDER_DEFAULT from "../../assets/svg/folder.svg";
+import FOLDER_DEFAULT from "../../../assets/svg/folder.svg";
 
 import path from "path";
 

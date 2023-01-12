@@ -28,8 +28,10 @@ function App() {
   }, []);
 
   const [currentTabs, setCurrentTabs] = useState([] as Array<XCodeTab>);
-  const [currentWindows, setCurrentWindows] = useState([] as Array<XCodeTabWindow>);
-  const [tabIndex, setTabIndex] = useState(0);
+  const [currentWindows, setCurrentWindows] = useState([{
+    ID: 1,
+    currentTab: 1
+  }] as Array<XCodeTabWindow>);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -40,8 +42,8 @@ function App() {
 
             <AppWrapper>
               <LeftNav></LeftNav>
-              <Core {...{tabIndex, setTabIndex, currentTabs, setCurrentTabs, currentWindows, setCurrentWindows}} />
-              <Extra {...{tabIndex, setTabIndex, currentTabs, setCurrentTabs, currentWindows, setCurrentWindows}} />
+              <Core {...{currentTabs, setCurrentTabs, currentWindows, setCurrentWindows}} />
+              <Extra {...{currentTabs, setCurrentTabs, currentWindows, setCurrentWindows}} />
             </AppWrapper>
           </>
         )}

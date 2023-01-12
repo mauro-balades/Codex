@@ -96,7 +96,6 @@ export const TabsContainer = styled.div`
 
         font-size: 15px;
 
-
         &:last-child {
             &::after {
 
@@ -125,6 +124,11 @@ export const TabsContainer = styled.div`
         }
     }
 
+    & .react-tabs__tab--selected.drag,
+    & .react-tabs__tab.drag {
+        background: ${(props: any) => props.theme.background.secondary} !important;
+    }
+
     & .react-tabs__tab span {
         width: 100%;
         margin-right: 5px;
@@ -145,7 +149,7 @@ export const TabsContainer = styled.div`
     }
 
     & .react-tabs__tab:hover img:last-child {
-        opacity: 1;
+        opacity: 1 !important;
     }
 
     & .react-tabs__tab img {
@@ -170,15 +174,28 @@ export const TabWindowWrapper = styled.div`
 
     position: relative;
     overflow: hidden;
+
+    margin: 20px;
+    margin-left: 0;
+
+    display: flex;
+    align-items: center;
+
 `
 
 export const TabWindow = styled.div`
     border: 1px solid ${(props: any) => props.theme.borders};
-    margin: 20px;
     border-radius: 10px;
     overflow: hidden;
 
     height: 100%;
+    width: -webkit-fill-available;
+
+    margin-right: .7rem;
+    &:last-child {
+        margin-right: 0;
+    }
+
     background: ${(props: any) => props.theme.background.primary};
 `
 
@@ -293,4 +310,50 @@ export const TabContainerList = styled.div`
     overflow: overlay;
 
     // TODO: edit scroll bar
+`
+
+export const DraggedTabPreview = styled.div`
+    position: absolute;
+    transition: .4s ease;
+
+    display: none;
+    z-index: 9;
+
+    opacity: .1;
+    border-radius: 10px;
+
+    background: #005CB8;
+    border: 3px solid #004182 !important;
+
+    &.active {
+        display: block;
+    }
+
+    &.left {
+        left: 0;
+        top: 0;
+
+        width: 50%;
+        height: 100%;
+    }
+
+    &.middle {
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        top: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    &.right {
+        left: 100%;
+        top: 0;
+
+        width: 50%;
+        height: 100%;
+
+        transform: translate(-100%, 0);
+    }
 `

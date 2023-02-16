@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { CLIENT_CREATE_TAB } from "constants/ipc";
 import { XCodeTab, Context, XCodeTabWindow } from "interfaces";
 import createReactClass from 'create-react-class';
-import Editor from "./editor";
+import Editor from "./editors/default";
 import { TabPluginContext } from "renderer/plugins/tabPlugin";
 
 import { getTabPosition, TabPosition } from "./getTabPosition";
@@ -33,9 +33,9 @@ export default (props: any) => {
             tab.context.windowID = tab.context.windowID || (currentWindows.length == 0 ? 1 : (currentWindows.length))
 
             if (tab.context.isFileTab) {
-                    // @ts-ignroe
-                    tab.component = createReactClass({
-                        render: function() {return (
+                // @ts-ignroe
+                tab.component = createReactClass({
+                    render: function() {return (
                         <CodeWrapper>
                             <Editor tab={tab} />
                         </CodeWrapper>
@@ -45,7 +45,8 @@ export default (props: any) => {
 
             pluginsManager.createWindowIfNoneExists();
 
-            let win = currentWindows.find((x: XCodeTabWindow) => x.ID === tab.context.windowID);
+            let win = currentWindows.find((x: XCodeTabWindow) => x.ID === tab.context.windowID) as XCodeTabWindow;
+
             setCurrentTabs((oldArray: any) => {
 
                 tab.ID = oldArray.length;
@@ -117,28 +118,28 @@ export default (props: any) => {
 
         let pos = getTabPosition(parent_width, x, y);
 
-        let win = currentWindows.find((x: XCodeTabWindow) => x.ID === tab.context.windowID);
+        let win = currentWindows.find((x: XCodeTabWindow) => x.ID === tab.context.windowID) as XCodeTabWindow;
         let winTabLen = currentTabs.filter((x: XCodeTab) => x.context.windowID === win.ID).length - 1;
 
         let newID = currentWindows.length + 1;
         tab.context.windowID = newID;
 
+        win.currentTab--;
+        let newTabWin: XCodeTabWindow = {
+            ID: newID,
+            currentTab: 0,
+        };
+
         if (pos === TabPosition.left) {
             setCurrentWindows((prevState: XCodeTabWindow[]) => [
-                {
-                    ID: newID,
-                    currentTab: 0,
-                },
+                newTabWin,
                 ...((winTabLen === 0) ? prevState.filter((x: XCodeTabWindow) => x.ID != win.ID)  : prevState)
             ])
         } else if (pos === TabPosition.right) {
 
             setCurrentWindows((prevState: XCodeTabWindow[]) => [
                 ...((winTabLen === 0) ? prevState.filter((x: XCodeTabWindow) => x.ID != win.ID) : prevState),
-                {
-                    ID: newID,
-                    currentTab: 0,
-                },
+                newTabWin,
             ])
         } else if (pos === TabPosition.center) {
             // TODO

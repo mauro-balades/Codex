@@ -1,7 +1,9 @@
 import React, { Context, useRef, useState } from "react";
 import { useTheme } from 'styled-components';
 import Editor, { loader, Monaco } from "@monaco-editor/react";
-import { BottomInfoBtn, BottomNavIcon, BottonNavInformation, EditorBottomNav } from "./styles";
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import { BottomInfoBtn, BottomNavIcon, BottonNavInformation, EditorBottomNav } from "../styles";
+import { VerticalSeparator } from "./styles";
 
 loader.config({
     paths: {
@@ -9,10 +11,10 @@ loader.config({
     }
 });
 
-export default ({tab}: any) => {
-    const editorRef = useRef(null);
+export default ({tab, children}: any) => {
     let theme = useTheme();
 
+    const [editorDidMount, setEditorDidMount] = useState(false);
     const [markersCount, setMarkersCount] = useState({ warns: 0, errors: 0});
     const [tabwidth, setTabWith] = useState(4 /* best tab width */);
     const [cursorPosition, setCursorPosition] = useState({
@@ -20,9 +22,12 @@ export default ({tab}: any) => {
         y: 0
     });
 
-    function handleEditorDidMount(editor: any, monaco: Monaco) {
-        monaco.editor.defineTheme('user-theme', theme.editor);
-        editorRef.current = editor;
+    function handleEditorDidMount(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) {
+        if (editorDidMount) {
+            return;
+        }
+
+        console.log(theme.editor)
 
         const model = monaco.editor.createModel(tab.context.content, undefined, monaco.Uri.file(tab.context.path));
         editor.setModel(model);
@@ -55,6 +60,14 @@ export default ({tab}: any) => {
                 y: event.position.column
             });
         })
+
+        monaco.editor.defineTheme('user-theme', theme.editor);
+
+        monaco.editor.setTheme("user-theme");
+
+        console.log(editor)
+
+        setEditorDidMount(true);
     }
 
     return (
@@ -91,6 +104,11 @@ export default ({tab}: any) => {
                     <BottomInfoBtn>
                         UTF-8
                     </BottomInfoBtn>
+                    {children !== undefined && (
+                        <>
+                            <VerticalSeparator></VerticalSeparator>
+                        </>
+                    )}
                 </BottonNavInformation>
             </EditorBottomNav>
         </>

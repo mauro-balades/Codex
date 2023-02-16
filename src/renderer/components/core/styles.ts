@@ -236,13 +236,25 @@ export const CodeWrapper = styled.div`
         border-left: 1px solid ${(props: any) => props.theme.borders};
     }
 
+    & .monaco-editor .line-numbers {
+        z-index: 2;
+    }
+
     & .monaco-editor .line-numbers.active-line-number::after {
+        z-index: -1;
         content: '';
         position: absolute;
-        background: #000;
-        width: 100%;
+
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        background: ${(props: any) => props.theme.editor.colors["editor.lineHighlightBackground"]};
+        border: 1px solid ${(props: any) => props.theme.editor.colors["editor.lineHighlightBackground"]};
+
+        width: 130%;
         height: 100%;
-        left: 60%;
+        left: 40%;
+        top: 40%;
+        transform: translate(0%, -50%);
     }
 `
 

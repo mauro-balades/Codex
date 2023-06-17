@@ -16,5 +16,6 @@ export const AppWrapper = styled.div`
 
     overflow: hidden;
 
+    color: ${(props: any) => props.theme.color.primary};
     font-family: ${(props: any) => props.theme.font.family};
 `

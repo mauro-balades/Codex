@@ -151,7 +151,7 @@ export const darkTheme = {
     },
     color: {
         accent: "#2295FF",
-        primary: "#fff"
+        primary: "rgba(255,255,255,.7)"
     },
     borders: "#3e3f41",
     font: {

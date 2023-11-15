@@ -1,6 +1,6 @@
 
 
-export const defaultTheme = {
+export const _ = {
     background: {
         primary: "#FCFCFC",
         secondary: "#EBECED",
@@ -139,16 +139,18 @@ export const defaultTheme = {
             "editorLineNumber.foreground": "#b3b3b3",
             "editorActiveLineNumber.foreground": "#5E5E60"
         }
-    }
+    },
+    dark: false
 }
 
 
-export const darkTheme = {
+export const defaultTheme = {
     background: {
         primary: "#23292E",
         secondary: "#1E1E1E",
         hover: "#2295FF"
     },
+    dark: true,
     color: {
         accent: "#2295FF",
         primary: "rgba(255,255,255,.7)"
@@ -159,11 +161,11 @@ export const darkTheme = {
         family: "'Poppins', sans-serif"
     },
     editor: {
-        "base": "vs",
+        "base": "vs-dark",
         "inherit": true,
         "rules": [
             {
-                "background": "FFFFFF",
+                "background": "1e1e1e",
                 "token": ""
             },
             {
@@ -272,11 +274,11 @@ export const darkTheme = {
             }
         ],
         "colors": {
-            "editor.foreground": "#000000",
-            "editor.background": "#FFFFFF",
+            "editor.foreground": "#ffffff",
+            "editor.background": "#23292E",
             "editor.selectionBackground": "#BDD5FC",
-            "editor.lineHighlightBackground": "#F4F4F4",
-            "editorCursor.foreground": "#000000",
+            "editor.lineHighlightBackground": "#323940",
+            "editorCursor.foreground": "#ffffff",
             "editorWhitespace.foreground": "#BFBFBF",
             "editorLineNumber.foreground": "#b3b3b3",
             "editorActiveLineNumber.foreground": "#5E5E60"

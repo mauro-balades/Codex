@@ -62,10 +62,7 @@ export default ({tab, children}: any) => {
         })
 
         monaco.editor.defineTheme('user-theme', theme.editor);
-
         monaco.editor.setTheme("user-theme");
-
-        console.log(editor)
 
         setEditorDidMount(true);
     }

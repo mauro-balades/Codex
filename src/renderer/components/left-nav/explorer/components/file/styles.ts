@@ -57,6 +57,8 @@ export const FileWrapper = styled.div`
             ${(props.information.isDir && (!props.closed)) ? `
                 opacity: .9;
                 filter: ${hexToCSSFilter(props.theme.color.accent).filter};
+            ` : props.information.isDir && props.theme.dark ? `
+                filter: invert(1);
             ` : ""}
         `}
     }

@@ -25,7 +25,6 @@ function File({information, level = 0}: any) {
             </FileWrapper>
         )
     } else {
-
         const [isClosed, setClosed] = useState(true);
 
         return (
